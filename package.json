@@ -1,0 +1,26 @@
+{
+	"name": "rest-screensaver",
+	"version": "1.0.0",
+	"description": "A cross-platform application to control the monitor via a REST interface.",
+	"main": "main.js",
+	"scripts": {
+		"start": "electron .",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build-mac": "electron-builder --mac"
+	},
+	"author": "Maximilian Giesen",
+	"license": "",
+	"dependencies": {},
+	"devDependencies": {
+		"electron": "^27.0.2",
+		"electron-builder": "^24.6.4"
+	},
+	"build": {
+		"mac": {
+			"icon": "./macIcon.png",
+			"extendInfo": {
+				"LSUIElement": true
+			}
+		}
+	}
+}

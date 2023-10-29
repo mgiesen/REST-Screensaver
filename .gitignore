@@ -1,0 +1,19 @@
+# Node-Module und Abhängigkeiten
+node_modules/
+package-lock.json
+
+# Build-Verzeichnisse
+/dist
+/out
+
+# Systemdateien
+.DS_Store
+
+# Temporäre Dateien
+*.tmp
+*.swp
+*.swo
+
+# IDE-Dateien
+.idea/
+.vscode/
