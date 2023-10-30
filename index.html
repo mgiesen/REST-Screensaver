@@ -1,24 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>REST Screensaver Control</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <h1>REST Screensaver Control</h1>
-  
-  <button id="infoButton">Info</button>
+<html>
+   <head>
+      <style>
+         body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #333;
+            color: #fff;
+         }
 
-  <script>
+         .app {
+            height: 100%;
+            width: 100%;
+         }
 
-    const infoButton = document.getElementById('infoButton');
+         .app-container {
+            display: flex;
+            height: 80vh;
+            padding-right: 40px;
+         }
 
-    infoButton.addEventListener('click', () => {
-      window.open('https://github.com/mgiesen/REST-Screensaver', '_blank');
-    });
+         .app-footer {
+            background-color: #444;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            border-top: 1px solid #555;
+            color: #fff;
+         }
 
-  </script>
-</body>
+         .app-sidebar {
+            height: 100%;
+            width: 35%;
+            display: flex;
+            justify-content: center;
+         }
+
+         .app-icon {
+            width: 150px;
+            height: 150px;
+            margin-top: 50px;
+         }
+
+         .app-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+         }
+
+         .label {
+            color: gray;
+            font-size: 90%;
+         }
+
+         input[type="text"] {
+            width: 300px;
+            padding: 8px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+         }
+
+         .seperator {
+            border-bottom: 1px solid rgb(81, 81, 81);
+            width: 100%;
+            height: 1px;
+         }
+
+         a:link {color: #fff; text-decoration: none; margin: 0}
+         a:visited {color: #fff; text-decoration: none; margin: 0}
+
+      </style>
+   </head>
+   <body>
+      <div class="app">
+         <div class="app-container">
+            <div class="app-sidebar">
+               <img src="dockIcon.png" class="app-icon">
+            </div>
+            <div class="app-content">
+             
+                    <h2>REST Screensaver</h2>
+                    <div class="seperator"></div>
+
+               <p class="label">Version 0.0.1</p>
+
+               <div></div>
+               <div style="display: flex; flex-direction: column;">
+                  <label for="textbox-power-off-endpoint">Power Off</label>
+                  <input type="text" id="textbox-power-off-endpoint" name="powerOff" placeholder="REST Command for Power Off">
+                  <label for="textbox-power-on-endpoint">Power On</label>
+                  <input type="text" id="textbox-power-on-endpoint" name="powerOn" placeholder="REST Command for Power On">
+               </div>
+
+               <p class="label">The Power-On command is automatically triggered upon detecting user interaction following a power-off command.</p>
+
+               <div class="seperator"></div>
+            
+               <div style="margin-top: 10px">
+                <input type="checkbox" id="checkbox-launch-on-login" name="launchOnLogin">
+                <label for="checkbox-launch-on-login">Launch on Login</label>
+               </div>
+    
+
+            </div>
+         </div>
+         <div class="app-footer">
+            <a href="https://github.com/mgiesen/REST-Screensaver">© REST-Screensaver 2023</a>
+         </div>
+      </div>
+
+      <script>
+
+        window.onload = () => {
+          const powerOn = localStorage.getItem('powerOnEndpoint');
+          const powerOff = localStorage.getItem('powerOffEndpoint');
+
+          if (powerOn !== null) {
+            document.getElementById('textbox-power-on-endpoint').value = powerOn;
+          }
+
+          if (powerOff !== null) {
+            document.getElementById('textbox-power-off-endpoint').value = powerOff;
+          }
+
+          document.getElementById('textbox-power-on-endpoint').addEventListener('change', function() {
+            localStorage.setItem('powerOnEndpoint', this.value);
+          });
+
+          document.getElementById('textbox-power-off-endpoint').addEventListener('change', function() {
+            localStorage.setItem('powerOffEndpoint', this.value);
+          });
+        };
+
+      </script>
+   </body>
 </html>
